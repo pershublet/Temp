@@ -83,76 +83,6 @@ class Solution
                     continue;
                 }
 
-                int w = Math.min( array[i][2], array[j][2] )
-                  - Math.max( array[i][0], array[j][0] );
-
-                w = Math.min
-                (
-                    w
-                    ,
-                    Math.min( array[i][3], array[j][3] )
-                        - Math.max( array[i][1], array[j][1] )
-                );
-
-                answer = Math.max( answer, w );
-            }
-
-            
-        }
-
-
-        return ( ( long ) ( answer ) ) * answer;
-    }
-
-}            a1[1] == a2[1]
-            ? a1[0] == a2[0]
-                ? a1[3] == a2[3]
-                    ? Integer.compare( a2[2], a1[2] )
-                    : Integer.compare( a2[3], a1[3] )
-                : Integer.compare( a1[0], a2[0] )
-            : Integer.compare( a1[1], a2[1] )
-        );
-
-
-        for
-        (
-            int i = 0
-            ; i < n
-            ; i ++
-        )
-        {
-
-            if
-            (
-                i >= 1
-                && array[i][0] >= array[i - 1][0]
-                && array[i][1] >= array[i - 1][1]
-                && array[i][2] <= array[i - 1][2]
-                && array[i][3] <= array[i - 1][3]
-            )
-            {
-                continue;
-            }
-
-
-            for
-            (
-                int j = i + 1
-                ; j < n
-                    && array[j][1] < array[i][3]
-                ; j ++
-            )
-            {
-
-                if
-                (
-                    array[i][0] >= array[j][2]
-                    || array[i][2] <= array[j][0]
-                )
-                {
-                    continue;
-                }
-
                 answer = Math.max
                 (
                     answer
@@ -160,7 +90,7 @@ class Solution
                     Math.min
                     (
                         Math.min( array[i][2], array[j][2] )
-                            - Math.max( arra[i][0], array[j][0] )
+                            - Math.max( array[i][0], array[j][0] )
                         ,
                         Math.min( array[i][3], array[j][3] )
                             - Math.max( array[i][1], array[j][1] )
