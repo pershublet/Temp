@@ -2,6 +2,11 @@
        program-id. Divisors.
       
        data division.
+       local-storage section.
+       77 N            pic 999.
+       77 d            pic 9(3) comp-5.
+       77 q            pic 9(5).
+       77 r             pic 9(3).
       
        linkage section.
        01  num         pic 9(6).
@@ -10,30 +15,30 @@
            03  res     pic 9(6) occurs 0 to 200 times
                                 depending on resLen
                                 indexed by i, j.
-       77 N            pic 99.
-       77 d            pic 99.
        procedure division using num result.
       
-          initialize result
-      
       *   set `resLen` to 0 if `num` is a prime number.
-          set i to 1.
-          set j to 200.
+          set i to 0.
+          set j to 201.
           compute N rounded = function sqrt(num)
       
           if function MOD(num, 2) equals to 0 then
-              move 2 to res(i)
               set i up by 1
               set j down by 1
+              move 2 to res(i)
               divide num by 2 giving res(j)
           end-if.
       
           perform varying d from 3 by 1 until d is greater than N
-              if function MOD(num, d) equals to 0 then
-                  move d to res(i)
+              divide num by d
+                  giving q
+                  remainder r
+      
+              if r equals to 0 then
                   set i up by 1
                   set j down by 1
-                  divide num by d giving res(j)
+                  move d to res(i)
+                  move q to res(j)
               end-if
           end-perform.
           
@@ -41,12 +46,13 @@
               set j up by 1
           end-if.
       
-          perform until j equals to 200
-              move res(j) to res(i)
+          perform until j is greater than 200
               set i up by 1
-              set j up by 2
+              move res(j) to res(i)
+              set j up by 1
           end-perform.
+        
+          move i to resLen.
       
           goback.
        end program Divisors.
-      
