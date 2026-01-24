@@ -9,12 +9,13 @@
        77 r            pic 9(3).
       
        linkage section.
-       01  num         pic 9(6) comp-5.
+       01  num         pic 9(6).
        01  result.
            03  resLen  pic 9(3).
            03  res     pic 9(6) occurs 0 to 200 times
                                 depending on resLen
                                 indexed by i, j.
+      
        procedure division using num result.
       
       *   set `resLen` to 0 if `num` is a prime number.
@@ -22,7 +23,7 @@
           set j to 201.
           compute N rounded = function sqrt(num)
       
-          if function MOD(num, 2) equals to 0 then
+          if function mod(num, 2) equals to 0 then
               set i up by 1
               set j down by 1
               move 2 to res(i)
