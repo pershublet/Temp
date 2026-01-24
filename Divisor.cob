@@ -3,11 +3,11 @@
       
        data division.
        local-storage section.
-       77 N            pic 999.
+       77 N            pic 999 comp-5.
        77 w            pic 9(6) comp-5.
        77 d            pic 9(3) comp-5.
-       77 q            pic 9(5).
-       77 r            pic 9(3).
+       77 q            pic 9(5) comp-5.
+       77 r            pic 9(3) comp-5.
       
        linkage section.
        01  num         pic 9(6).
