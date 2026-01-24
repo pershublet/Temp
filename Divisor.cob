@@ -4,6 +4,7 @@
        data division.
        local-storage section.
        77 N            pic 999.
+       77 w            pic 9(6) comp-5.
        77 d            pic 9(3) comp-5.
        77 q            pic 9(5).
        77 r            pic 9(3).
@@ -17,21 +18,14 @@
                                 indexed by i, j.
       
        procedure division using num result.
-      
       *   set `resLen` to 0 if `num` is a prime number.
           set i to 0.
           set j to 201.
+          move num to w.
           compute N rounded = function sqrt(num)
       
-          if function mod(num, 2) equals to 0 then
-              set i up by 1
-              set j down by 1
-              move 2 to res(i)
-              divide num by 2 giving res(j)
-          end-if.
-      
-          perform varying d from 3 by 1 until d is greater than N
-              divide num by d
+          perform varying d from 2 by 1 until d is greater than N
+              divide w by d
                   giving q
                   remainder r
       
@@ -57,3 +51,4 @@
       
           goback.
        end program Divisors.
+      
