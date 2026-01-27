@@ -8,10 +8,12 @@ class Solution {
             .forEach(c -> targetMap.put(c, targeting.getOrDefault(, 0) + 1);
         final HashSet<Integer> hashSet = new HashSet<>();
         
-        for (int p = 2; p <= w; p ++) {
+        for (int x = 1; x <= w; x ++) {
             if (w % x != 0) {
                 continue;
             }
+
+            final int y = w / x;
         }
         
     }
