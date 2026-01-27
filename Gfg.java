@@ -1,54 +1,18 @@
-class Solution
-{
-    
-    public
-    ArrayList < Integer >
-    nextFreqGreater
-    (
-        int [] arr
-    )
-    {
-        final int N = arr.length;
-        final HashMap < Integer, Integer > hashMap = new HashMap <> ();
-        final ArrayList < Integer > answer = new ArrayList <> ();
-        final Stack < Integer > stack = new Stack <> ();
+class Solution {
+    public boolean isWordExist(char[][] mat, String word) {
+        final int n = mat.length;
+        final int m = mat[0].length;
+        final int w = word.length();
+        final HashMap<Character, Integer> targetMap = new HashMap<>();
+        Arrays.stream(word.toCharArray())
+            .forEach(c -> targetMap.put(c, targeting.getOrDefault(, 0) + 1);
+        final HashSet<Integer> hashSet = new HashSet<>();
         
-        
-        for
-        (
-            final int num
-            : arr
-        )
-        {
-            hashMap.put( num, hashMap.getOrDefault( num, 0 ) + 1 );
-        }
-        
-        
-        for
-        (
-            int i = 0
-            ; i < N
-            ; i ++
-        )
-        {
-            
-            
-            while
-            (
-                !stack.isEmpty()
-                && hashMap.get( arr[stack.peek()] ) < hashMap.get( arr[i] )
-            )
-            {
-                answer.set( stack.pop(), arr[i] );
+        for (int p = 2; p <= w; p ++) {
+            if (w % x != 0) {
+                continue;
             }
-            
-            
-            answer.add( -1 );
-            stack.push( i );
         }
         
-        
-        return answer;
     }
-    
 }
