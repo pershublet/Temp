@@ -41,15 +41,15 @@ class Solution {
             for (int[] d : dir) {
                 final int x = i + d[0];
                 final int y = j + d[1];
-                final int newCost = grid[x][y] + cost;
 
                 if (x < m && y < n && newCost < table[x][y][t]) {
+                    final int newCost = grid[x][y] + cost;
                     priorityQueue.offer(new State(x, y, t, newCost));
                     table[x][y][t] = newCost;
                 }
             }
 
-            if(t >= 0) {
+            if(s >= 0) {
                 treeMap.headMap(grid[i][j]).values().forEach(hs -> hs.forEach(e -> {
                     final int x = e.getKey();
                     final int y = e.getValue();
