@@ -22,7 +22,7 @@ class Solution {
                 }
 
                 treeMap.get(grid[i][j]).add(new SimpleImmutableEntry<>(i, j));
-                Arrays.fill(table[i][j][Integer.MAX_VALUE]);
+                Arrays.fill(table[i][j], Integer.MAX_VALUE);
             }
         }
 
