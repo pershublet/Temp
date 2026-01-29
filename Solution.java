@@ -10,11 +10,10 @@ class Solution {
         final int n = grid[0].length;
         final int M = m - 1;
         final int N = n - 1;
-        final int[][][] table = new State[m][n][k + 1];
+        final int[][][] table = new int[m][n][k + 1];
         final PriorityQueue<State> priorityQueue = new PriorityQueue<>();
         priorityQueue.offer(new State(0, 0, k, 0));
-        final TreeMap<Integer, HashSet<SimpleImmutableEntry<Integer, Integer>>> treeMap =
-                new TreeMap<>(Comparator.comparingInt(SimpleImmutableEntry::getValue));
+        final TreeMap<Integer, HashSet<SimpleImmutableEntry<Integer, Integer>>> treeMap = new TreeMap<>();
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
