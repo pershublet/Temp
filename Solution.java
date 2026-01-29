@@ -44,10 +44,10 @@ class Solution {
             for (int[] d : dir) {
                 final int x = i + d[0];
                 final int y = j + d[1];
-                final newCost = grid[x][y] + cost;
+                final int newCost = grid[x][y] + cost;
 
                 if (x < m && y < n && newCost < table[x][y][t]) {
-                    priorityQueue.offer(final State nextState = new State(x, y, t, newCost));
+                    priorityQueue.offer(new State(x, y, t, newCost));
                     table[x][y][t] = newCost;
                 }
             }
@@ -58,7 +58,7 @@ class Solution {
                     final int y = e.getValue();
 
                     if (cost < table[x][y][s]) {
-                        priorityQueue.offer(new State(x, y, s, cost);
+                        priorityQueue.offer(new State(x, y, s, cost));
                         table[x][y][s] = cost;
                     }
                 }
