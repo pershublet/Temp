@@ -31,9 +31,9 @@ class Solution {
             final int i = currState.getI();
             final int j = currState.getJ();
             final int t = currState.getTeleportations();
-            final int s = teleportations - 1;
+            final int s = t - 1;
             final int cost = currState.getCost();
-            System.out.println(i + " " + j + " " + teleportations + " " + cost);
+            System.out.println(i + " " + j + " " + t + " " + cost);
             if (i == M && j == N) {
                 return cost;
             } else if (!thisState.maybeBetterThan(states[i][j])) {
