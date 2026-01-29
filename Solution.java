@@ -13,7 +13,8 @@ class Solution {
         final int[][][] table = new State[m][n][k + 1];
         final PriorityQueue<State> priorityQueue = new PriorityQueue<>();
         priorityQueue.offer(new State(0, 0, k, 0));
-        final TreeMap<Integer, HashSet<State>>> treeMap = new TreeMap<>();
+        final TreeMap<Integer, SimpleImmutableEntry<Integer, Integer>> treeMap =
+                new TreeMap<>(Comparator.comparingInt(SimpleImmutableEntry::getValue));
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -21,7 +22,7 @@ class Solution {
                     treeMap.put(grid[i][j], new HashSet<>());
                 }
 
-                treeMap.get(grid[i][j]).add(new State(i, j, 0, Integer.MAX_VALUE));
+                treeMap.get(grid[i][j]).add(new SimpleImmutableEntry<>(i, j));
                 Arrays.fill(table[i][j][Integer.MAX_VALUE]);
             }
         }
