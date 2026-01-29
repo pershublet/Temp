@@ -26,6 +26,8 @@ class Solution {
             }
         }
 
+        Arrays.fill(table[0][0], 0);
+
         while (!priorityQueue.isEmpty()) {
             State currState = priorityQueue.poll();
             final int i = currState.getI();
@@ -42,10 +44,13 @@ class Solution {
                 final int x = i + d[0];
                 final int y = j + d[1];
 
-                if (x < m && y < n && newCost < table[x][y][t]) {
+                if (x < m && y < n) {
                     final int newCost = grid[x][y] + cost;
-                    priorityQueue.offer(new State(x, y, t, newCost));
-                    table[x][y][t] = newCost;
+
+                    if (newCost < table[x][y][t]) {
+                        priorityQueue.offer(new State(x, y, t, newCost));
+                        table[x][y][t] = newCost;
+                    }
                 }
             }
 
