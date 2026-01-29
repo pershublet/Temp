@@ -13,7 +13,7 @@ class Solution {
         final int[][][] table = new State[m][n][k + 1];
         final PriorityQueue<State> priorityQueue = new PriorityQueue<>();
         priorityQueue.offer(new State(0, 0, k, 0));
-        final TreeMap<Integer, SimpleImmutableEntry<Integer, Integer>> treeMap =
+        final TreeMap<Integer, HashSet<SimpleImmutableEntry<Integer, Integer>>> treeMap =
                 new TreeMap<>(Comparator.comparingInt(SimpleImmutableEntry::getValue));
 
         for (int i = 0; i < m; i++) {
@@ -53,7 +53,7 @@ class Solution {
             }
 
             if(t >= 0) {
-                treeMap.headMap(grid[i][j]).values().forEach(s -> s.forEach(e -> {
+                treeMap.headMap(grid[i][j]).values().forEach(hs -> hs.forEach(e -> {
                     final int x = e.getKey();
                     final int y = e.getValue();
 
@@ -61,7 +61,7 @@ class Solution {
                         priorityQueue.offer(new State(x, y, s, cost));
                         table[x][y][s] = cost;
                     }
-                }
+                }));
             }
         }
 
