@@ -36,8 +36,6 @@ class Solution {
             System.out.println(i + " " + j + " " + t + " " + cost);
             if (i == M && j == N) {
                 return cost;
-            } else if (!thisState.maybeBetterThan(states[i][j])) {
-                continue;
             }
 
             for (int[] d : dir) {
