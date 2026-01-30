@@ -26,7 +26,7 @@ class Solution {
             }
         }
 
-        final int firstKey = keyMap.firstKey();
+        final int firstKey = treeMap.firstKey();
         Arrays.fill(table[0][0], 0);
 
         while (!priorityQueue.isEmpty()) {
@@ -61,10 +61,10 @@ class Solution {
             }
 
             if(s >= 0) {
-                for (int g = firstKey; g <= v; g = treeMap.higher(g)) {
-                    treeMap.get(g).forEach((x, y) -> {
-                    //final int x = e.getKey();
-                    //final int y = e.getValue();
+                for (int g = firstKey; g <= v; g = treeMap.higherKey(g)) {
+                    treeMap.get(g).forEach(e -> {
+                    final int x = e.getKey();
+                    final int y = e.getValue();
 
                     if (cost < table[x][y][s]) {
                         priorityQueue.offer(new State(x, y, s, cost));
