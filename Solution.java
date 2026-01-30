@@ -11,10 +11,9 @@ class Solution {
         final int M = m - 1;
         final int N = n - 1;
         final int[][][] table = new int[m][n][k + 1];
-        final PriorityQueue<int[]> priorityQueue = new PriorityQueue<>((x, y) -> x[3] == y[3] ? y[2] - x[2] : x[3] - y[3]);
-        //priorityQueue.offer(new State(0, 0, k, 0));
-        priorityQueue.offer(new int[] {0, 0, k, 0});
-        final TreeMap<Integer, HashSet<int[]>> treeMap = new TreeMap<>();
+        final PriorityQueue<State> priorityQueue = new PriorityQueue<>();
+        priorityQueue.offer(new State(0, 0, k, 0));
+        final TreeMap<Integer, HashSet<SimpleImmutableEntry<Integer, Integer>>> treeMap = new TreeMap<>();
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -22,23 +21,26 @@ class Solution {
                     treeMap.put(grid[i][j], new HashSet<>());
                 }
 
-                treeMap.get(grid[i][j]).add(new int[] {i, j});
+                treeMap.get(grid[i][j]).add(new SimpleImmutableEntry<>(i, j));
                 Arrays.fill(table[i][j], Integer.MAX_VALUE);
             }
         }
 
+        final int firstKey = keyMap.firstKey();
         Arrays.fill(table[0][0], 0);
 
         while (!priorityQueue.isEmpty()) {
-            final int[] curr = priorityQueue.poll();
-            final int i = curr[0];
-            final int j = curr[1];
-            final int t = curr[2];
+            State currState = priorityQueue.poll();
+            final int i = currState.getI();
+            final int j = currState.getJ();
+            final int t = currState.getTeleportations();
             final int s = t - 1;
-            final int cost = curr[3];
+            final int cost = currState.getCost();
+            final int v = grid[i][j];
+
             // System.out.println(i + " " + j + " " + t + " " + cost);
             if (i == M && j == N) {
-                return c;
+                return cost;
             }
 
             for (int[] d : dir) {
@@ -46,31 +48,33 @@ class Solution {
                 final int y = j + d[1];
 
                 if (x < m && y < n) {
-                    final int newC = grid[x][y] + c;
+                    final int newCost = grid[x][y] + cost;
 
-                    if (newC < table[x][y][t]) {
-                        //priorityQueue.offer(new State(x, y, t, newC));
+                    if (newCost < table[x][y][t]) {
+                        priorityQueue.offer(new State(x, y, t, newCost));
                         
-                        for (int h = t; h >= 0 && newC < table[x][y][h]; h--) {
-                            table[x][y][h] = newC;
+                        for (int h = t; h >= 0 && newCost < table[x][y][h]; h--) {
+                            table[x][y][h] = newCost;
                         }
                     }
                 }
             }
 
             if(s >= 0) {
-                treeMap.headMap(grid[i][j], true).values().forEach(hs -> hs.forEach(a -> {
-                    final int x = a[0];
-                    final int y = a[1];
+                for (int g = firstKey; g <= v; g = treeMap.higher(g)) {
+                    treeMap.get(g).forEach((x, y) -> {
+                    //final int x = e.getKey();
+                    //final int y = e.getValue();
 
-                    if (c < table[x][y][s]) {
-                        //priorityQueue.offer(new State(x, y, s, c));
+                    if (cost < table[x][y][s]) {
+                        priorityQueue.offer(new State(x, y, s, cost));
                         
-                        for (int h = s; h >= 0 && c < table[x][y][h]; h--) {
-                            table[x][y][h] = c;
+                        for (int h = s; h >= 0 && cost < table[x][y][h]; h--) {
+                            table[x][y][h] = cost;
                         }
                     }
-                }));
+                    });
+                }
             }
         }
 
