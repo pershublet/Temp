@@ -35,7 +35,7 @@ class Solution {
             final int t = currState.getTeleportations();
             final int s = t - 1;
             final int cost = currState.getCost();
-            System.out.println(i + " " + j + " " + t + " " + cost);
+            // System.out.println(i + " " + j + " " + t + " " + cost);
             if (i == M && j == N) {
                 return cost;
             }
@@ -55,7 +55,7 @@ class Solution {
             }
 
             if(s >= 0) {
-                treeMap.headMap(grid[i][j]).values().forEach(hs -> hs.forEach(e -> {
+                treeMap.headMap(grid[i][j], true).values().forEach(hs -> hs.forEach(e -> {
                     final int x = e.getKey();
                     final int y = e.getValue();
 
