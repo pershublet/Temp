@@ -49,7 +49,10 @@ class Solution {
 
                     if (newCost < table[x][y][t]) {
                         priorityQueue.offer(new State(x, y, t, newCost));
-                        table[x][y][t] = newCost;
+                        
+                        for (int i = t; i >= 0 && newCost < table[x][y][i];i--) {
+                            table[x][y][i] = newCost;
+                        }
                     }
                 }
             }
@@ -61,7 +64,10 @@ class Solution {
 
                     if (cost < table[x][y][s]) {
                         priorityQueue.offer(new State(x, y, s, cost));
-                        table[x][y][s] = cost;
+                        
+                        for (int i = s; i >= 0 && newCost < table[x][y][i];i--) {
+                            table[x][y][i] = newCost;
+                        }
                     }
                 }));
             }
