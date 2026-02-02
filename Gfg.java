@@ -1,15 +1,16 @@
 class Solution {
-    public void rearrangeQueue(Queue<Integer> q) {
-        final ArrayDeque<Integer> p = new ArrayDeque<>();
-        final int n = q.size() / 2;
+    public int maxProfit(int[] prices) {
+        int buy = 10001;
+        int answer = 0;
         
-        for (int i = 0; i < n; i++) {
-            p.offerLast(q.poll());
+        for (final int price : prices) {
+            if (price <= buy) {
+                buy = price;
+            } else {
+                answer = Math.max(answer, price - buy);
+            }
         }
         
-        for (int i = 0; i < n; i++) {
-            q.offer(p.poll());
-            q.offer(q.poll());
-        }
+        return answer;
     }
 }
